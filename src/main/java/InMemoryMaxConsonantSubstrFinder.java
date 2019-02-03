@@ -42,6 +42,7 @@ public class InMemoryMaxConsonantSubstrFinder implements MaxConsonantSubstrFinde
         if(listOfWords != null){
             listOfWords.add(stringBuilder.toString());
         } else {
+            map = new TreeMap<>();
             List<String> newList = new LinkedList<>();
             newList.add(stringBuilder.toString());
             map.put(maxConsonants, newList);

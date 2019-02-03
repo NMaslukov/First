@@ -1,3 +1,5 @@
+package laba;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,7 +10,6 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 public class SlowMaxConsonantSubstrFinder implements MaxConsonantSubstrFinder {
-    private Set<String> wordsWithMaxConsonantSubsr = new HashSet<>();
     private static final Logger log = Logger.getLogger(SlowMaxConsonantSubstrFinder.class.getName());
 
     private int maxConsonants = 0;
@@ -16,7 +17,7 @@ public class SlowMaxConsonantSubstrFinder implements MaxConsonantSubstrFinder {
 
     public SlowMaxConsonantSubstrFinder(String fileName){
         this.fileName = fileName;
-        log.info("Using SlowMaxConsonantSubstrFinder class");
+        log.info("Using laba.SlowMaxConsonantSubstrFinder class");
     }
 
     @Override
@@ -42,7 +43,9 @@ public class SlowMaxConsonantSubstrFinder implements MaxConsonantSubstrFinder {
             do {
                 ch = br.read();
                 if(String.valueOf((char)ch).equals(" ") || ch == -1){
-                    if(MaxConsonantSubstrFinder.findMaxConsonantsSubstr(stringBuilder.toString()) == maxConsonants) wordsWithMaxConsonantSubsr.add(stringBuilder.toString());
+                    if(MaxConsonantSubstrFinder.findMaxConsonantsSubstr(stringBuilder.toString()) == maxConsonants) {
+                        System.out.println(stringBuilder.toString());
+                    }
                     stringBuilder = new StringBuilder();
                     continue;
                 }
@@ -51,8 +54,5 @@ public class SlowMaxConsonantSubstrFinder implements MaxConsonantSubstrFinder {
             }
             while (ch != -1);
         }
-
-
-        wordsWithMaxConsonantSubsr.forEach(System.out::println);
     }
 }

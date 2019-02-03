@@ -1,3 +1,5 @@
+package laba;
+
 import java.util.Objects;
 
 public class Application {

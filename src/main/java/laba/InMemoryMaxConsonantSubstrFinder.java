@@ -1,9 +1,10 @@
+package laba;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 public class InMemoryMaxConsonantSubstrFinder implements MaxConsonantSubstrFinder {
@@ -15,7 +16,7 @@ public class InMemoryMaxConsonantSubstrFinder implements MaxConsonantSubstrFinde
 
     public InMemoryMaxConsonantSubstrFinder(String fileName) {
         this.fileName = fileName;
-        log.info("Using InMemoryMaxConsonantSubstrFinder class");
+        log.info("Using laba.InMemoryMaxConsonantSubstrFinder class");
     }
 
     @Override

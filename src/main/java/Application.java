@@ -9,7 +9,7 @@ public class Application {
 
         MaxConsonantSubstrFinder finder;
         double memoryDelta = 0.65;
-        String fileName = "input.txt";
+        String fileName = "test.txt";
 
         if(freeMemory * memoryDelta > Objects.requireNonNull(Application.class.getClassLoader().getResourceAsStream(fileName)).available()){
             finder = new InMemoryMaxConsonantSubstrFinder(fileName);

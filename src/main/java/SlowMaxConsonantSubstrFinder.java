@@ -5,15 +5,18 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Logger;
 
 public class SlowMaxConsonantSubstrFinder implements MaxConsonantSubstrFinder {
     private Set<String> wordsWithMaxConsonantSubsr = new HashSet<>();
+    private static final Logger log = Logger.getLogger(SlowMaxConsonantSubstrFinder.class.getName());
 
     private int maxConsonants = 0;
     private String fileName;
 
     public SlowMaxConsonantSubstrFinder(String fileName){
         this.fileName = fileName;
+        log.info("Using SlowMaxConsonantSubstrFinder class");
     }
 
     @Override

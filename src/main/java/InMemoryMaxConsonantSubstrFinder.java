@@ -3,15 +3,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 public class InMemoryMaxConsonantSubstrFinder implements MaxConsonantSubstrFinder {
 
     private String fileName;
     private Map<Integer, List<String>> map = new TreeMap<>();
     private int maxConsonants = 0;
+    private static final Logger log = Logger.getLogger(InMemoryMaxConsonantSubstrFinder.class.getName());
 
     public InMemoryMaxConsonantSubstrFinder(String fileName) {
         this.fileName = fileName;
+        log.info("Using InMemoryMaxConsonantSubstrFinder class");
     }
 
     @Override

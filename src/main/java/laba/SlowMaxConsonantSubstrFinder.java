@@ -28,7 +28,7 @@ public class SlowMaxConsonantSubstrFinder implements MaxConsonantSubstrFinder {
 
             do {
                 ch = br.read();
-                if(String.valueOf((char)ch).equals(" ") || ch == -1){
+                if(checkDelimiter(ch)){
                     maxConsonants = Math.max(MaxConsonantSubstrFinder.findMaxConsonantsSubstr(stringBuilder.toString()), maxConsonants);
                     stringBuilder = new StringBuilder();
                     continue;
@@ -42,7 +42,7 @@ public class SlowMaxConsonantSubstrFinder implements MaxConsonantSubstrFinder {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(Objects.requireNonNull(this.getClass().getClassLoader().getResourceAsStream(fileName)), StandardCharsets.UTF_8))) {
             do {
                 ch = br.read();
-                if(String.valueOf((char)ch).equals(" ") || ch == -1){
+                if(checkDelimiter(ch)){
                     if(MaxConsonantSubstrFinder.findMaxConsonantsSubstr(stringBuilder.toString()) == maxConsonants) {
                         System.out.println(stringBuilder.toString());
                     }
@@ -54,5 +54,9 @@ public class SlowMaxConsonantSubstrFinder implements MaxConsonantSubstrFinder {
             }
             while (ch != -1);
         }
+    }
+
+    private boolean checkDelimiter(int ch) {
+        return String.valueOf((char) ch).equals(" ") || String.valueOf((char) ch).equals("\n") || ch == -1;
     }
 }

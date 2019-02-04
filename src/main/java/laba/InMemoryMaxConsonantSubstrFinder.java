@@ -1,16 +1,19 @@
 package laba;
 
-import java.io.BufferedReader;
+import javafx.util.Pair;
+
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.nio.file.Files;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class InMemoryMaxConsonantSubstrFinder implements MaxConsonantSubstrFinder {
 
+    public static final String RESOURCES_DIR = "/home/dudoser/IdeaProjects/First/src/main/resources/";
     private String fileName;
-    private Map<Integer, List<String>> map = new TreeMap<>();
+    private Pair<Integer, List<String>> consonantListPair;
     private int maxConsonants = 0;
     private static final Logger log = Logger.getLogger(InMemoryMaxConsonantSubstrFinder.class.getName());
 
@@ -21,36 +24,33 @@ public class InMemoryMaxConsonantSubstrFinder implements MaxConsonantSubstrFinde
 
     @Override
     public void printWordsWithMaxConsonantSequence() throws IOException {
-        StringBuilder stringBuilder = new StringBuilder();
-        int ch;
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(Objects.requireNonNull(this.getClass().getClassLoader().getResourceAsStream(fileName)), StandardCharsets.UTF_8))) {
-
-            do {
-                ch = br.read();
-                if(String.valueOf((char)ch).equals(" ") || ch == -1){
-                    maxConsonants = Math.max(MaxConsonantSubstrFinder.findMaxConsonantsSubstr(stringBuilder.toString()), maxConsonants);
-                    saveWord(stringBuilder);
-                    stringBuilder = new StringBuilder();
-                    continue;
-                }
-
-                stringBuilder.append((char)ch);
-            }
-            while (ch != -1);
+        String[] words = new String(Files.readAllBytes(new File(RESOURCES_DIR + fileName).toPath())).replace("\n", " ").split(" ");
+        for (String word : words) {
+            process(word);
         }
 
-        map.get(maxConsonants).forEach(System.out::println);
+        consonantListPair.getValue().forEach(System.out::println);
     }
 
-    private void saveWord(StringBuilder stringBuilder) {
-        List<String> listOfWords = map.get(maxConsonants);
-        if(listOfWords != null){
-            listOfWords.add(stringBuilder.toString());
-        } else {
-            map = new TreeMap<>();
-            List<String> newList = new LinkedList<>();
-            newList.add(stringBuilder.toString());
-            map.put(maxConsonants, newList);
+    private void process(String word) {
+        int maxConsonantsSubstr = MaxConsonantSubstrFinder.findMaxConsonantsSubstr(word);
+        int result = Integer.compare(maxConsonantsSubstr, maxConsonants);
+
+        switch (result) {
+            case 1:  {
+                maxConsonants = maxConsonantsSubstr;
+                List<String> newList = new LinkedList<>();
+                newList.add(word);
+                consonantListPair = new Pair<>(maxConsonants, newList);
+                break;
+            }
+
+            case 0: {
+                consonantListPair.getValue().add(word);
+                break;
+            }
+
+            default: break;
         }
     }
 }

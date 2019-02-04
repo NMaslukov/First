@@ -5,15 +5,15 @@ import javafx.util.Pair;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Logger;
 
 public class InMemoryMaxConsonantSubstrFinder implements MaxConsonantSubstrFinder {
 
     public static final String RESOURCES_DIR = "/home/dudoser/IdeaProjects/First/src/main/resources/";
     private String fileName;
-    private Pair<Integer, List<String>> consonantListPair;
+    private Pair<Integer, Set<String>> consonantListPair;
     private int maxConsonants = 0;
     private static final Logger log = Logger.getLogger(InMemoryMaxConsonantSubstrFinder.class.getName());
 
@@ -39,9 +39,9 @@ public class InMemoryMaxConsonantSubstrFinder implements MaxConsonantSubstrFinde
         switch (result) {
             case 1:  {
                 maxConsonants = maxConsonantsSubstr;
-                List<String> newList = new LinkedList<>();
-                newList.add(word);
-                consonantListPair = new Pair<>(maxConsonants, newList);
+                Set<String> newSet = new TreeSet<>();
+                newSet.add(word);
+                consonantListPair = new Pair<>(maxConsonants, newSet);
                 break;
             }
 
